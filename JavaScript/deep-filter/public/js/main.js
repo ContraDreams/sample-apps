@@ -17,7 +17,7 @@ var downloadLink = document.getElementById("resultLink");
 var currentImg = "";
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
+Algorithmia.api_key = "simB0HFEv5wx4S0qguKo7vpq2vg1";
 var numTasks = 0;
 
 // Update the style thumbnail view state
@@ -104,8 +104,8 @@ function generateStylizedImage(img, filterName) {
     "savePrefix": "s3+turing://algorithmia-demos/deepstyle/"
   };
 
-  Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.5")
+  Algorithmia.client(Algorithmia.api_key, "http://api.test.algorithmia.com/v1/web/algo")
+    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.0")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
