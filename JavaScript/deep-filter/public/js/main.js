@@ -5,7 +5,7 @@
 
 // Filter selection
 var defaultFilters = [
-  "none", "smooth_ride", "space_pizza", "purple_pond", "sunday", "alien_goggles"
+  "none", "smooth_ride", "crafty_painting", "purple_pond", "sunday", "oily_mcoilface"
 ];
 var currentFilter = "smooth_ride";
 
@@ -105,7 +105,7 @@ function generateStylizedImage(img, filterName) {
   };
 
   Algorithmia.client(Algorithmia.api_key, "http://api.test.algorithmia.com/v1/web/algo")
-    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.0")
+    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.1")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
@@ -136,8 +136,6 @@ function generateStylizedImage(img, filterName) {
 function displayImg(url, cb) {
   resultImg.src = url;
   resultImg.onload = function() {
-    // Scroll to image
-    resultsDiv.scrollIntoView();
     showResults();
 
     if(cb) cb();
@@ -158,9 +156,7 @@ function displayImgBase64(url, base64, cb) {
 
   // Update stylized canvas
   resultImg.onload = function() {
-
-    // Scroll to image
-    resultImg.scrollIntoView();
+    showResults();
 
     // Done
     if(cb) cb();
@@ -179,6 +175,10 @@ function showResults() {
   // resultsThumbsDiv.style.height = "";
   document.getElementById("downloadLinks").classList.remove("hidden");
   resultImg.classList.remove("faded");
+  document.getElementById("results").classList.remove("hidden");
+
+  // Scroll to image
+  resultsDiv.scrollIntoView(true);
 }
 
 function clickDownload(e) {
@@ -209,7 +209,8 @@ function finishTask() {
   if(numTasks <= 0) {
     document.getElementById("overlay").classList.add("hidden");
     // document.getElementById("explainer").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
+    // document.getElementById("results").classList.remove("hidden");
+    // document.getElementById("resultImg").classList.remove("faded");
     // document.getElementById("social").classList.remove("invisible");
     // document.getElementById("marketing").classList.remove("hidden");
   }
